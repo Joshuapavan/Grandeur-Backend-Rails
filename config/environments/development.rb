@@ -62,4 +62,10 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+    # Set Active Storage URL options
+    config.active_storage.service_urls_expire_in = 1.hour # Optional: Set the expiration time for the URLs
+    config.after_initialize do
+      ActiveStorage::Current.url_options = Rails.application.config.action_mailer.default_url_options
+    end
 end
