@@ -5,12 +5,12 @@ class UsersController < ApplicationController
             UserMailer.verify_email(user).deliver_now
             render json: { 
                 message: 'User created. Please check your email to verify your account.',
-                data: {
-                    name: user.first_name,
+                # data: {
+                    first_name: user.first_name,
                     email: user.email,
                     token: user.verification_token,
                     status: user.verified
-                }
+                # }
                 }, status: :created
         else
             render json: { error: user.errors.full_messages }, status: :unprocessable_entity
@@ -33,12 +33,12 @@ class UsersController < ApplicationController
         if user.password == params[:password]
             render json:{
                 message: "logged in successfully",
-                data: {
-                    name: user.first_name,
+                # data: {
+                    first_name: user.first_name,
                     email: user.email,
                     token: user.verification_token,
                     status: user.verified
-                }
+                # }
             }, status: :ok
         else
             render json: {

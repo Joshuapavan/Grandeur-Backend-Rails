@@ -44,7 +44,22 @@ class CarsController < ApplicationController
         end
     end     
 
-    
+    def search
+        cars = Car.where("lower(name) LIKE ? OR lower(brand) LIKE ? OR lower(model) LIKE ?", 
+        "%#{params[:search].downcase}%", "%#{params[:search].downcase}%", "%#{params[:search].downcase}%")
+        if cars.empty?
+            render json: {
+                message: "no cars found",
+                cars: []
+            }, status: :not_found
+        else
+            render json: {
+                message: "cars found",
+                cars: CarSerializer.new(cars)
+            }, status: :ok
+        end
+    end
+
     private
 
     def car_params
