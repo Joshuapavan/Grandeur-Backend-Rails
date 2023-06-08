@@ -61,7 +61,7 @@ class CarsController < ApplicationController
     end
 
     def destroy
-        Car.delete.all
+        Car.destroy_all
         render json: {
             message: "All cars deleted"
         }, status: :ok
