@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/cars/all', to: 'cars#index'
 
   get '/cars/search', to: 'cars#search'
+  delete '/cars/delete', to: 'cars#destroy'
 end
