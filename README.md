@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+Api collection- https://api.postman.com/collections/25610988-a1e5e10a-f219-46bc-aea8-72ab2882e409?access_key=PMAT-01H2DMPA8C0GP94KK9VCQDA9HF
