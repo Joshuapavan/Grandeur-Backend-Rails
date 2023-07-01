@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   post '/users/sign_up', to: 'users#create'
   get '/users/verify_email', to: 'users#verify_email'
   post '/users/login', to: 'users#login'
