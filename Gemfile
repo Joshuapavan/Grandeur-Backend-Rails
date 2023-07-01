@@ -55,3 +55,4 @@ gem 'dotenv-rails', '~> 2.7', :require => 'dotenv/rails-now'
 gem 'jwt', '~> 2.2'
 gem 'active_model_serializers'
 gem 'fast_jsonapi'
+gem 'letter_opener_web', group: :development

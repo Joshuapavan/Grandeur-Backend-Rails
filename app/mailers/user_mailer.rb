@@ -2,7 +2,7 @@ class UserMailer < ApplicationMailer
     def verify_email(user)
         @user = user
         mail(
-            from: 'shanu@carz.com',
+            from: 'joshua@grandeur.com',
             to: @user.email, 
             subject: 'Verify Your Email') do |format|
             format.html { render 'verify_email' }

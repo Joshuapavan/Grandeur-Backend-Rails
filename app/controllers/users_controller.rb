@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         user = User.find_by(verification_token: params[:token])
         if user
             user.mark_as_verified!
-            render json: { message: 'Email verified successfully.' }
+            # render json: { message: 'Email verified successfully.' }, status: :success
         else
             render json: { error: 'Invalid verification token.' }, status: :unprocessable_entity
         end

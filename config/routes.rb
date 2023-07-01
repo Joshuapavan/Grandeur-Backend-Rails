@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   post '/users/sign_up', to: 'users#create'
-  post '/users/verify_email', to: 'users#verify_email'
+  get '/users/verify_email', to: 'users#verify_email'
   post '/users/login', to: 'users#login'
 
   post '/cars/new', to: 'cars#create'
@@ -8,4 +9,8 @@ Rails.application.routes.draw do
 
   get '/cars/search', to: 'cars#search'
   delete '/cars/delete', to: 'cars#destroy'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  end
 end
