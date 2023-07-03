@@ -1,4 +1,5 @@
-class UsersController < ApplicationController
+class UsersController < BaseController
+    before_action :check_is_bllcked, only: [:login]
     def create
         user = User.new(user_params)
         if user.save
@@ -12,6 +13,16 @@ class UsersController < ApplicationController
                     status: user.verified
                 # }
                 }, status: :created
+        else
+            render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+        end
+    end
+
+
+    def destroy
+        user = User.find_by(id: params[:id])
+        if user.destroy
+            render json: { message: 'User deleted successfully.' }, status: :ok
         else
             render json: { error: user.errors.full_messages }, status: :unprocessable_entity
         end
@@ -51,5 +62,14 @@ class UsersController < ApplicationController
 
     def user_params
         params.permit(:first_name, :last_name, :email, :password)
+    end
+
+    def check_is_bllcked
+        user = User.find_by(email: params[:email])
+        if user.is_blocked
+            render json: {
+                message: "User is blocked, please contact admin"
+            }, status: :unauthorized
+        end
     end
 end  

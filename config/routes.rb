@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   post '/users/sign_up', to: 'users#create'
   get '/users/verify_email', to: 'users#verify_email'
   post '/users/login', to: 'users#login'

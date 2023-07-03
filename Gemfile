@@ -56,3 +56,12 @@ gem 'jwt', '~> 2.2'
 gem 'active_model_serializers'
 gem 'fast_jsonapi'
 gem 'letter_opener_web', group: :development
+
+gem 'activeadmin'
+gem 'devise'
+gem 'sprockets', '<4'
+gem 'sass-rails'
+# gem 'bootstrap', '~> 5.0'
+gem 'arctic_admin'
+gem 'activeadmin_quill_editor'
+gem 'activeadmin_addons'

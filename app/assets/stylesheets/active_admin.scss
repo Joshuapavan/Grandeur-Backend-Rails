@@ -1,0 +1,122 @@
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+//app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+@import "active_admin/mixins";
+
+
+// Overriding any non-variable SASS must be done after the fact.
+// For example, to change the default status-tag color:
+//
+//   .status_tag { background: #6090DB; }
+.has_one ~ .has_many_add, .has_one ~ .has_many_remove {
+  display: none !important;
+}
+div.col-xs-4 img { max-width: 100%; }
+div.col-xs-6 img { max-width: 100%; }
+div.col-xs-8 img { max-width: 100%; }
+div.col-xs-8 { width: 200px; }
+div.col-xs-4 { width: 100px; }
+
+.imageclass{
+  max-width: 60px;
+  margin-left: 6px;
+  margin-top: 3px;
+}
+
+.date_class{
+  float: right;
+}
+
+.title_class{
+  margin-top: -40px;
+}
+
+.notification_content{
+  margin-left: 93px;
+}
+
+img {
+  max-width: 100%
+}
+
+.btn_respond{
+  
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    display: inline-block;
+    cursor: pointer;
+    padding: 4px 8px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+.btn_respond_new{
+    background-color: #5E6469;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    display: inline-block;
+    cursor: pointer;
+    padding: 4px 8px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+.status_tag {
+  &.wip { background: orange; }
+  &.dispatched { background: blue; }
+  &.delivered { background: green; }
+  &.cancel { background: red; }
+  &.waiting  { background: #CCCC00 }
+  &.pending  { background: orange }
+  &.on_hold { background: #CCCC00 }
+  &.successful { background: green }
+}
+@import "arctic_admin/base";
+@import 'activeadmin_addons/all';
+@import "arctic_admin/base";
+@import 'activeadmin/quill_editor/quill.snow';
+@import 'activeadmin/quill_editor_input';
+
+#index_table_bx_block_request_management_request_types
+{
+.delete_link {
+display: none; }
+}
+// @media screen and (min-width: 576px){
+//     body.logged_in.new .input .label{
+//         width: 7%
+//     }
+
+//     body.logged_in.new .input.boolean{
+//         margin-left: 20px;
+//     }
+
+//     body.logged_in.new .actions{
+//         padding-left: 0%
+//     }
+// }
+
+// .col-description{
+//   white-space: pre;
+// }
+// .col-subscription_name{
+//   white-space: pre;
+// }
+.header-item {
+
+  #admin_users,
+  #comments, 
+  #bx_block_custom_user_subs_subscriptions
+  {
+    display: none;
+  }
+}

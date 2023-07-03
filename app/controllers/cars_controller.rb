@@ -1,4 +1,6 @@
-class CarsController < ApplicationController
+class CarsController < BaseController
+
+    before_action :check_is_blocked, only: [:create]
 
     def index
         @cars = Car.order(created_at: :desc)
@@ -72,6 +74,15 @@ class CarsController < ApplicationController
 
     def car_params
         params.permit(:name, :email, :brand, :model, :car_number, :year_of_manufacture, :kms_driven, :price, :any_damages, :type_of_car, :no_of_owners, :insured, :image)
+    end
+
+    def check_is_blocked
+        user = User.find_by(email: params[:email])
+        if user.is_blocked
+            render json: {
+                message: "User is blocked, please contact admin"
+            }, status: :unauthorized
+        end
     end
 
 end
