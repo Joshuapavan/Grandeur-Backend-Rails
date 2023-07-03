@@ -1,4 +1,6 @@
-ActiveAdmin.register User, as: "User" do
+ActiveAdmin.register User do
+
+  actions :all
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -15,29 +17,8 @@ ActiveAdmin.register User, as: "User" do
   #   permitted
   # end
   
-  permit_params :list, :of, :attributes, :on, :users, :first_name, :last_name, :email, :password ,:verified, :is_blocked
-  # permit_params :fi :verified, :is_blocked
 
-  actions :all, except: [:new]
-
-  # Enable batch delete action
-  # batch_action :destroy, confirm: "Are you sure you want to delete these items?"
-
-
-  # member_action :delete, method: :delete do
-  #   # Find the record by ID
-  #   record = User.find(params[:id])
-
-  #   # Delete the record
-  #   record.destroy
-
-  #   # Redirect to the index page with a success message
-  #   redirect_to admin_user_path, notice: 'Record deleted successfully'
-  # end
-
-  # action_item :delete, only: :show do
-  #   link_to 'Delete', admin_user_delete_path(resource), method: :delete, data: { confirm: 'Are you sure you want to delete this record?' }
-  # end
+  permit_params :verified, :is_blocked, :_destroy
 
   index do
     selectable_column
@@ -47,30 +28,25 @@ ActiveAdmin.register User, as: "User" do
     column :email
     column :verified
     column :is_blocked
-    actions :defaults => true
+    actions
+  end
+  
+  batch_action :destroy, confirm: 'Are you sure you want to delete these users?' do |ids|
+    User.where(id: ids).destroy_all
+    redirect_to admin_users_path, notice: 'Selected users were successfully deleted.'
+  end
+  
+
+  actions :all, except: [:destroy] # Remove the `except` option if it's already present
+
+  # Add the `destroy` action explicitly
+  action_item :destroy, only: :show do
+    link_to 'Delete', resource_path(resource), method: :delete, data: { confirm: 'Are you sure?' }
   end
 
-  show do
-    attributes_table do
-      row :first_name
-      row :last_name
-      row :email
-      row :verified
-      row :is_blocked
-    end
-  end
-
-
-  form do |f|
-    f.inputs do
-      f.input :first_name
-      f.input :last_name
-      f.input :email
-      f.input :password
-      f.input :verified
-      f.input :is_blocked
-    end
-    f.actions
+  member_action :destroy, method: :delete do
+    resource.destroy
+    redirect_to admin_users_path, notice: 'User was successfully deleted.'
   end
 
 

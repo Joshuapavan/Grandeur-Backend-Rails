@@ -1,21 +1,5 @@
 ActiveAdmin.register Car do
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :name, :email, :brand, :model, :car_number, :year_of_manufacture, :kms_driven, :price, :any_damages, :type_of_car, :no_of_owners, :insured, :user_id
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :email, :brand, :model, :car_number, :year_of_manufacture, :kms_driven, :price, :any_damages, :type_of_car, :no_of_owners, :insured, :user_id]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-
-  permit_params :list, :of, :attributes, :on, :cars , :name, :email, :brand, :model, :car_number, :year_of_manufacture, :kms_driven, :price, :any_damages, :type_of_car, :no_of_owners, :insured, :user_id
+  permit_params :name, :email, :brand, :model, :car_number, :year_of_manufacture, :kms_driven, :price, :any_damages, :type_of_car, :no_of_owners, :insured, :user_id
 
   index do
     selectable_column
@@ -54,7 +38,6 @@ ActiveAdmin.register Car do
     f.actions
   end
 
-
   filter :name
   filter :email
   filter :brand
@@ -67,5 +50,20 @@ ActiveAdmin.register Car do
   filter :type_of_car
   filter :no_of_owners
   filter :insured
-  
+
+  # Delete action for individual car records
+  action_item :destroy, only: :show do
+    link_to 'Delete', resource_path(resource), method: :delete, data: { confirm: 'Are you sure?' }
+  end
+
+  member_action :destroy, method: :delete do
+    resource.destroy
+    redirect_to admin_cars_path, notice: 'Car was successfully deleted.'
+  end
+
+  # Batch action for deleting multiple cars
+  batch_action :destroy, confirm: 'Are you sure you want to delete these cars?' do |ids|
+    Car.where(id: ids).destroy_all
+    redirect_to admin_cars_path, notice: 'Selected cars were successfully deleted.'
+  end
 end
