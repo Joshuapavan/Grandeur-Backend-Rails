@@ -1,23 +1,4 @@
 ActiveAdmin.register User do
-
-  actions :all
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :first_name, :last_name, :email, :password, :verified, :verification_token
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:first_name, :last_name, :email, :password, :verified, :verification_token]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
-
   permit_params :verified, :is_blocked, :_destroy
 
   index do
@@ -37,7 +18,7 @@ ActiveAdmin.register User do
   end
   
 
-  actions :all, except: [:destroy] # Remove the `except` option if it's already present
+  actions :all, except: [:destroy] 
 
   # Add the `destroy` action explicitly
   action_item :destroy, only: :show do
