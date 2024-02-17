@@ -18,16 +18,16 @@ class CarsController < BaseController
     end
 
 
-    def create 
+    def create
         user = User.find_by(email: params[:email])
         
-        if user.present? 
+        if user.present?
         if user.verified
             car = user.cars.build(car_params)  # Associate the car with the user
             if car.save
             render json: {
                 message: "Car created"
-            }, status: :ok 
+            }, status: :ok
             else
             render json: {
                 message: "Car not created",
@@ -44,7 +44,7 @@ class CarsController < BaseController
             message: "User is not present"
         }, status: :unauthorized
         end
-    end     
+    end
 
     def search
         cars = Car.where("lower(name) LIKE ? OR lower(brand) LIKE ? OR lower(model) LIKE ?", 

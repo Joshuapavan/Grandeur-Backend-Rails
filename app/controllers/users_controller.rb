@@ -4,7 +4,7 @@ class UsersController < BaseController
         user = User.new(user_params)
         if user.save
             UserMailer.verify_email(user).deliver_now
-            render json: { 
+            render json: {
                 message: 'User created. Please check your email to verify your account.',
                 # data: {
                     first_name: user.first_name,
@@ -72,4 +72,4 @@ class UsersController < BaseController
             }, status: :unauthorized
         end
     end
-end  
+end
