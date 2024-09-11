@@ -21,6 +21,8 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
 
+      hr
+
       column do
         panel "Recent Cars" do
           ul do
@@ -28,6 +30,26 @@ ActiveAdmin.register_page "Dashboard" do
               li link_to(car.brand, admin_car_path(car))
             end
           end
+        end
+      end
+
+      hr
+
+      column do
+        panel "" do
+          user_data = User.group_by_day(:created_at).count
+
+          # Render the chart directly in the view
+          render partial: 'admin/dashboard/chart', locals: { data: user_data, title: "Users Signed Up By Date!" }
+        end
+      end
+
+      column do
+        panel "" do
+          car_data = Car.group_by_day(:created_at).count
+
+          # Render the chart directly in the view
+          render partial: 'admin/dashboard/chart', locals: { data: car_data, title: "Users Signed Up By Date!" }
         end
       end
     end
@@ -54,4 +76,9 @@ ActiveAdmin.register_page "Dashboard" do
     #   end
     # end
   end # content
+
+  # content do
+  #   # Fetch users signed up by date
+
+  # end
 end

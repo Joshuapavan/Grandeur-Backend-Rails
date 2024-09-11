@@ -42,7 +42,7 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
+  # gem 'pg'
 end
 
 group :development do
@@ -61,7 +61,8 @@ gem 'activeadmin'
 gem 'devise'
 gem 'sprockets', '<4'
 gem 'sass-rails'
-# gem 'bootstrap', '~> 5.0'
 gem 'arctic_admin'
 gem 'activeadmin_quill_editor'
 gem 'activeadmin_addons'
+gem 'chartkick'
+gem 'groupdate'
