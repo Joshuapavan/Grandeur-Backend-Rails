@@ -1,27 +1,74 @@
-# README
+# Grandeur Backend API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Ruby on Rails API backend for the Grandeur car marketplace application.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+- Ruby 3.0.4
+- Rails 7.0.5
+- SQLite3 (development/test)
+- PostgreSQL (production)
 
-* System dependencies
+## Setup
 
-* Configuration
+1. Clone the repository
+2. Install dependencies:
+```bash
+bundle install
+```
+3. Setup database:
+```bash
+rails db:create
+rails db:migrate
+```
+4. Start the server:
+```bash
+rails server
+```
 
-* Database creation
+## API Endpoints
 
-* Database initialization
+### Users
+- `POST /users/sign_up` - Register a new user
+- `GET /users/verify_email` - Verify user email
+- `POST /users/login` - User login
 
-* How to run the test suite
+### Cars
+- `POST /cars/new` - Create a new car listing
+- `GET /cars/all` - Get all car listings
+- `GET /cars/search` - Search cars by name, brand, or model
+- `DELETE /cars/delete` - Delete car listings
 
-* Services (job queues, cache servers, search engines, etc.)
+## Admin Panel
 
-* Deployment instructions
+Access the admin panel at `/admin`. Features include:
+- User management
+- Car listings management
+- Analytics dashboard
+- Email verification status
 
-* ...
+## Dependencies
 
+- Active Admin - Admin interface
+- Devise - Authentication for admin
+- Mailgun - Email service
+- JWT - Token authentication
+- Active Model Serializers - JSON serialization
+- Rack CORS - Cross-Origin Resource Sharing
 
-Api collection- https://api.postman.com/collections/25610988-a1e5e10a-f219-46bc-aea8-72ab2882e409?access_key=PMAT-01H2DMPA8C0GP94KK9VCQDA9HF
+## Testing
+
+Run the test suite:
+```bash
+rails test
+```
+
+## API Documentation
+
+Full API documentation available at:
+https://api.postman.com/collections/25610988-a1e5e10a-f219-46bc-aea8-72ab2882e409?access_key=PMAT-01H2DMPA8C0GP94KK9VCQDA9HF
+
+## Development
+
+For local development, emails are sent to letter_opener at:
+http://localhost:3000/letter_opener
